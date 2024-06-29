@@ -1,0 +1,87 @@
+# depslib dependency file v1.0
+1719418641 source:c:\users\sol15\documents\cien o escalera\juegodados\juego\funciones.cpp
+	<iostream>
+	"funciones.h"
+	"dados.h"
+	"rlutil.h"
+	<cstdlib>
+	<ctime>
+
+1719419467 source:c:\users\sol15\documents\cien o escalera\juegodados\juego\dados.cpp
+	<iostream>
+	"rlutil.h"
+	"dados.h"
+
+1719408719 c:\users\sol15\documents\cien o escalera\juegodados\juego\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1719418624 c:\users\sol15\documents\cien o escalera\juegodados\juego\dados.h
+
+1719417366 source:c:\users\sol15\documents\cien o escalera\juegodados\juego\main.cpp
+	<iostream>
+	"funciones.h"
+	"rlutil.h"
+	<cstdlib>
+	<ctime>
+
+1719417053 c:\users\sol15\documents\cien o escalera\juegodados\juego\funciones.h
+
+1719618791 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\dados.cpp
+	<iostream>
+	"rlutil.h"
+	"Dados.h"
+
+1719408719 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1719612986 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\dados.h
+
+1719618791 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\main.cpp
+	<iostream>
+	"Menu.h"
+	<cstdlib>
+	<ctime>
+	<windows.h>
+	<cstdio>
+
+1719617315 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\funciones.h
+
+1719618978 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\funciones.cpp
+	<iostream>
+	"Funciones.h"
+	"Dados.h"
+	"rlutil.h"
+	<cstdlib>
+	<ctime>
+
+1719618791 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\menu.cpp
+	<iostream>
+	"Menu.h"
+	"rlutil.h"
+	"Dados.h"
+	"Funciones.h"
+
+1719497839 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\menu.h
+
