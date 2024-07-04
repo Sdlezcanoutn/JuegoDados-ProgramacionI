@@ -11,7 +11,7 @@ void Menu(){ ///FUNCION MENU
     int opcion;
 
     do { /// MUENU PRINCIPAL ///
-        PlaySound(TEXT("waiting.wav"), NULL, SND_FILENAME | SND_ASYNC);
+       PlaySound(TEXT("waiting.wav"), NULL, SND_FILENAME | SND_ASYNC);
         cout << "************************************************************************************************************************************************************************************************************************ BIENVENIDO/OS A CIEN O ESCALERA ***************************************************************************************************************************************************************************************************************************" << endl;
         rlutil::anykey(); /// PARA PRESIONAR TECLA Y CONTINUAR (system("pause>nul"))
         rlutil::cls(); /// LIMPIA LA PANTALLA (system("cls"))
@@ -19,7 +19,7 @@ void Menu(){ ///FUNCION MENU
         cout << "Ingrese una opcion: " << endl;
         cout << "1. MODO 1 JUGADOR" << endl;
         cout << "2. MODO 2 JUGADORES" << endl;
-        //cout << "ACA PODRIAMOS PODER EL MODO TESTING" << endl;
+        cout << "3. RANKING" << endl;
         cout << "4. SALIR" << endl << endl;
 
         cin >> opcion;
@@ -36,7 +36,7 @@ void Menu(){ ///FUNCION MENU
             break;
         case 3:
             rlutil::cls();
-            //BLABLABLA();
+
             break;
         case 4:
             rlutil::cls();

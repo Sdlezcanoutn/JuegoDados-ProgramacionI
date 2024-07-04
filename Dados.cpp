@@ -158,3 +158,15 @@ void mostrarDados(int dados[]) {
         rlutil::msleep(40); //simula la accion de tirar dados retardando el tiempo
     }
 }
+
+
+/*tirarDados(int dados[]){
+for (int i=0; i < TAM_CANTIDAD_DADO; I++){
+    int numero;
+    cout << "INGRESE EL VALOR DEL DADO: " << endl;
+    cin >> numero;
+
+    dados[i] = numero;
+}
+
+*/

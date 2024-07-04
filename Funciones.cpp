@@ -8,7 +8,7 @@
 using namespace std;
 
 
-/// MODO UN JUGADOR
+////////////////////////////////////////////////////////////////// MODO UN JUGADOR //////////////////////////////////////////////////////////////////////
 void juegoUnJugador() {
     rlutil::hidecursor(); ///OCULTA EL CURSOR
     rlutil::saveDefaultColor(); ///GUARDA EL COLOR PREDETERMINADO
@@ -28,6 +28,12 @@ void juegoUnJugador() {
     int ronda = 0; ///INICIO DE RONDA
     //PRUEBA
     int dados[TAM_CANTIDAD_DADO];
+
+
+    ///PRUEBAAAAAAAAAAAA
+    int puntuacionMaxima = 0;
+    string nombreMaximaPuntuacion;
+
 
 /// SI SE LLEGA A 100 GANA (PRINCIPAL)
 while (puntajeTotal < 100) {
@@ -86,6 +92,16 @@ while (puntajeTotal < 100) {
 if (puntajeTotal >= 100) { ///define ganador
         PlaySound(TEXT("victoria.wav"), NULL, SND_FILENAME | SND_ASYNC);
             cout << nombre << " GANO LA PARTIDA CON " << puntajeTotal << " PUNTOS EN " << ronda << " RONDAS." << endl;
+
+
+            ///PARTE DE PRUEBAAAAAAAAAAAAAAAAA
+           if (puntajeTotal > puntuacionMaxima)
+            {
+                puntuacionMaxima = puntajeTotal; // Si es mayor a la puntuacion maxima, lo actualizo con el nuevo puntaje final.
+                nombreMaximaPuntuacion = nombre; // Actualizo nombre.
+                rlutil::locate(46,26);
+                cout << "PUNTUACION MAXIMA DEL JUEGO: " << " [ " << puntuacionMaxima << " ] " << " Y LO REALIZO: " << " [ " << nombreMaximaPuntuacion << " ] " << endl;
+            }
         }
     }
     rlutil::locate(1,40);
@@ -94,6 +110,8 @@ if (puntajeTotal >= 100) { ///define ganador
     rlutil::cls();
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// JUEGO DOS JUGADORES /////////////////////////////////////////////////
 
 void juegoDosJugadores() {
     rlutil::hidecursor(); // OCULTA EL CURSOR
@@ -286,10 +304,12 @@ int calcularPuntaje(int dados[]) {
 /// SEIS NUMEROS IGUALES, SE MULTIPLICA POR 10 EL NUMERO DEL DADO
     if (cont == 36 && dados[0] != 6) {
         puntos = dados[0] * 10;
+        rlutil::locate(1,16);
         cout << "SEXTETO DE " << dados[0] << endl << endl;
     }
     /// SEIS 6, SE VUELVE A 0
     if (cont == 36 && dados[0] == 6) { /// 36 PQ TODOS LOS DADOS TIENEN LOS MISMO N°, SE COMPARAN DANDO QUE COINCIDAN 6 VECES (6*6 = 36)
+        rlutil::locate(60,15);
         cout << "SEXTETO DE 6" << endl << endl;
         puntos = 0;
     }
@@ -301,299 +321,4 @@ int calcularPuntaje(int dados[]) {
     }
     return puntos;
 }
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*void juegoDosJugadores() {
-    rlutil::hidecursor(); ///OCULTA EL CURSOR
-    rlutil::saveDefaultColor(); ///GUARDA EL COLOR PREDETERMINADO
-
-    string nombre1, nombre2;
-    cout << "INGRESE EL NOMBRE DEL JUGADOR 1: ";
-    getline(cin, nombre1);
-    while (nombre1 == "") {/// CHEQUEA QUE EL NOMBRE NO ESTE VACIO
-        cout << "Por favor ingrese un nombre: ";
-        getline(cin, nombre1);
-    }
-
-    cout << endl << "INGRESE EL NOMBRE DEL JUGADOR 2: ";
-    getline(cin, nombre2);
-    while (nombre2 == "") {/// CHEQUEA QUE EL NOMBRE NO ESTE VACIO
-        cout << "Por favor ingrese un nombre: ";
-        getline(cin, nombre2);
-    }
-
-    int puntajeJugador1 = 0, puntajeJugador2 = 0;
-    int ronda = 0;
-    int dados[TAM];
-
-    while (puntajeJugador1 < 100 && puntajeJugador2 < 100) {
-        ronda++;
-        int maxPuntajeRonda1 = 0;
-        int maxPuntajeRonda2 = 0;
-
-        rlutil::cls();
-        rlutil::locate(50,1);
-        cout << "-----------------------------------------------------------" << endl;
-        rlutil::locate(69,2);
-        cout << "RONDA N: " << ronda << " | PUNTAJES ACUMULADOS:" << endl;
-        rlutil::locate(73,3);
-        cout << nombre1 << ": " << puntajeJugador1 << " | " << nombre2 << ": " << puntajeJugador2 << endl;
-        rlutil::locate(50,4);
-        cout << "-----------------------------------------------------------" << endl << endl;
-
-        /// Turno del Jugador 1
-        for (int i = 1; i <= 3; ++i) {
-            rlutil::locate(45, 30);
-            cout << "Presione una tecla para que " << nombre1 << " comience con la tirada NUMERO " << i << " de la ronda actual...";
-            rlutil::anykey();
-            rlutil::cls();
-            cout << endl << endl;
-
-            cout << "                                            TURNO DE " << nombre1 << " | RONDA NUMERO " << ronda << " | PUNTAJE MAXIMO DE RONDA ACTUAL: " << maxPuntajeRonda1 << " PUNTOS." << endl << endl << endl;
-            cout << "LANZAMIENTO NUMERO " << i << ": " << endl;
-            int puntajeLanzamiento = calcularPuntaje(dados);
-
-            rlutil::locate(1, 17); ///POSICION PARA QUE SE VEA
-            cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
-            if (puntajeLanzamiento == 100) {
-                cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
-                puntajeJugador1 += 100;
-                break;
-            } else if (puntajeLanzamiento == 0) {
-                puntajeJugador1 = 0;
-                cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
-                break;
-            }
-            if (puntajeLanzamiento > maxPuntajeRonda1) {
-                maxPuntajeRonda1 = puntajeLanzamiento;
-            }
-
-            if (puntajeJugador1 + puntajeLanzamiento >= 100) {
-                puntajeJugador1 += puntajeLanzamiento;
-                break;
-            }
-
-            if (i == 3) {
-                puntajeJugador1 += maxPuntajeRonda1;
-                cout << "MAXIMO PUNTAJE OBTENIDO DE LA RONDA: " << maxPuntajeRonda1 << endl;
-                cout << "PUNTAJE TOTAL DE PARTIDA: " << puntajeJugador1 << endl << endl;
-                rlutil::locate(60, 25);
-                cout << "Presione una tecla para pasar a la tirada del Jugador 2...";
-                rlutil::anykey();
-                rlutil::cls();
-            }
-        }
-
-        if (puntajeJugador1 >= 100) {
-            cout << nombre1 << " GANO LA PARTIDA CON " << puntajeJugador1 << " PUNTOS EN " << ronda << " RONDAS." << endl;
-            break;
-        }
-
-        /// Turno del Jugador 2
-        for (int i = 1; i <= 3; ++i) {
-            rlutil::locate(45, 20);
-            cout << "Presione una tecla para que " << nombre2 << " comience con la tirada NUMERO " << i << " de la ronda actual...";
-            rlutil::anykey();
-            rlutil::cls();
-            cout << endl << endl;
-
-            cout << "                                            TURNO DE " << nombre2 << " | RONDA NUMERO " << ronda << " | PUNTAJE MAXIMO DE RONDA ACTUAL: " << maxPuntajeRonda2 << " PUNTOS." << endl << endl << endl;
-            cout << "LANZAMIENTO NUMERO " << i << ": " << endl;
-            int puntajeLanzamiento = calcularPuntaje(dados);
-
-            rlutil::locate(1, 17); ///POSICION PARA QUE SE VEA
-            cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
-            if (puntajeLanzamiento == 100) {
-                cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
-                puntajeJugador2 += 100;
-                break;
-            } else if (puntajeLanzamiento == 0) {
-                puntajeJugador2 = 0;
-                cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
-                break;
-            }
-            if (puntajeLanzamiento > maxPuntajeRonda2) {
-                maxPuntajeRonda2 = puntajeLanzamiento;
-            }
-
-            if (puntajeJugador2 + puntajeLanzamiento >= 100) {
-                puntajeJugador2 += puntajeLanzamiento;
-                break;
-            }
-
-            if (i == 3) {
-                puntajeJugador2 += maxPuntajeRonda2;
-                cout << "MAXIMO PUNTAJE OBTENIDO DE LA RONDA: " << maxPuntajeRonda2 << endl;
-                cout << "PUNTAJE TOTAL DE PARTIDA: " << puntajeJugador2 << endl << endl;
-                rlutil::locate(60, 25);
-                cout << "Presione una tecla para pasar a la siguiente ronda...";
-                rlutil::anykey();
-            }
-        }
-
-        if (puntajeJugador2 >= 100) {
-            cout << nombre2 << " GANO LA PARTIDA CON " << puntajeJugador2 << " PUNTOS EN " << ronda << " RONDAS." << endl;
-            break;
-        }
-    }
-
-    rlutil::locate(1, 40);
-    cout << "                                                                                   \nPresione una tecla para volver a menu principal...";
-    rlutil::anykey();
-    rlutil::cls();
-
-    }
-*/
-
-
-///////
-///PRUEBA
-/*
-void juegoDosJugadores() {
-    rlutil::hidecursor(); // OCULTA EL CURSOR
-    rlutil::saveDefaultColor(); // GUARDA EL COLOR PREDETERMINADO
-
-    string nombre1, nombre2;
-    cout << "INGRESE EL NOMBRE DEL JUGADOR 1: ";
-    getline(cin, nombre1);
-    while (nombre1 == "") { // CHEQUEA QUE EL NOMBRE NO ESTE VACIO
-        cout << "Por favor ingrese un nombre: ";
-        getline(cin, nombre1);
-    }
-
-    cout << endl << "INGRESE EL NOMBRE DEL JUGADOR 2: ";
-    getline(cin, nombre2);
-    while (nombre2 == "") { // CHEQUEA QUE EL NOMBRE NO ESTE VACIO
-        cout << "Por favor ingrese un nombre: ";
-        getline(cin, nombre2);
-    }
-
-    int puntajeJugador1 = 0, puntajeJugador2 = 0;
-    int ronda = 0;
-    int dados[TAM];
-    bool rondaTerminada = false;
-
-    while (!rondaTerminada) {
-        ronda++;
-        int maxPuntajeRonda1 = 0;
-        int maxPuntajeRonda2 = 0;
-
-        rlutil::cls();
-        rlutil::locate(50, 1);
-        cout << "-----------------------------------------------------------" << endl;
-        rlutil::locate(69, 2);
-        cout << "RONDA N: " << ronda << " | PUNTAJES ACUMULADOS:" << endl;
-        rlutil::locate(73, 3);
-        cout << nombre1 << ": " << puntajeJugador1 << " | " << nombre2 << ": " << puntajeJugador2 << endl;
-        rlutil::locate(50, 4);
-        cout << "-----------------------------------------------------------" << endl << endl;
-
-        // Turno del Jugador 1
-        for (int i = 1; i <= 3; ++i) {
-            rlutil::locate(45, 30);
-            cout << "Presione una tecla para que " << nombre1 << " comience con la tirada NUMERO " << i << " de la ronda actual...";
-            rlutil::anykey();
-            rlutil::cls();
-            cout << endl << endl;
-
-            cout << "                                            TURNO DE " << nombre1 << " | RONDA NUMERO " << ronda << " | PUNTAJE MAXIMO DE RONDA ACTUAL: " << maxPuntajeRonda1 << " PUNTOS." << endl << endl << endl;
-            cout << "LANZAMIENTO NUMERO " << i << ": " << endl;
-            int puntajeLanzamiento = calcularPuntaje(dados);
-
-            rlutil::locate(1, 17); // POSICION PARA QUE SE VEA
-            cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
-            if (puntajeLanzamiento == 100) {
-                cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
-                puntajeJugador1 += 100;
-                break;
-            } else if (puntajeLanzamiento == 0) {
-                puntajeJugador1 = 0;
-                cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
-                break;
-            }
-            if (puntajeLanzamiento > maxPuntajeRonda1) {
-                maxPuntajeRonda1 = puntajeLanzamiento;
-            }
-
-            if (i == 3) {
-                puntajeJugador1 += maxPuntajeRonda1;
-                cout << "MAXIMO PUNTAJE OBTENIDO DE LA RONDA: " << maxPuntajeRonda1 << endl;
-                cout << "PUNTAJE TOTAL DE PARTIDA: " << puntajeJugador1 << endl << endl;
-                rlutil::locate(60, 25);
-                cout << "Presione una tecla para pasar a la tirada del Jugador 2...";
-                rlutil::anykey();
-                rlutil::cls();
-            }
-        }
-
-        // Turno del Jugador 2
-        for (int i = 1; i <= 3; ++i) {
-            rlutil::locate(45, 20);
-            cout << "Presione una tecla para que " << nombre2 << " comience con la tirada NUMERO " << i << " de la ronda actual...";
-            rlutil::anykey();
-            rlutil::cls();
-            cout << endl << endl;
-
-            cout << "                                            TURNO DE " << nombre2 << " | RONDA NUMERO " << ronda << " | PUNTAJE MAXIMO DE RONDA ACTUAL: " << maxPuntajeRonda2 << " PUNTOS." << endl << endl << endl;
-            cout << "LANZAMIENTO NUMERO " << i << ": " << endl;
-            int puntajeLanzamiento = calcularPuntaje(dados);
-
-            rlutil::locate(1, 17); // POSICION PARA QUE SE VEA
-            cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
-            if (puntajeLanzamiento == 100) {
-                cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
-                puntajeJugador2 += 100;
-                break;
-            } else if (puntajeLanzamiento == 0) {
-                puntajeJugador2 = 0;
-                cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
-                break;
-            }
-            if (puntajeLanzamiento > maxPuntajeRonda2) {
-                maxPuntajeRonda2 = puntajeLanzamiento;
-            }
-
-            if (i == 3) {
-                puntajeJugador2 += maxPuntajeRonda2;
-                cout << "MAXIMO PUNTAJE OBTENIDO DE LA RONDA: " << maxPuntajeRonda2 << endl;
-                cout << "PUNTAJE TOTAL DE PARTIDA: " << puntajeJugador2 << endl << endl;
-                rlutil::locate(60, 25);
-                cout << "Presione una tecla para pasar a la siguiente ronda...";
-                rlutil::anykey();
-            }
-        }
-
-        if (puntajeJugador1 >= 100 || puntajeJugador2 >= 100) {
-            rondaTerminada = true;
-        }
-    }
-
-    // Mostrar cartel final con el ganador y los puntajes
-    rlutil::cls();
-    rlutil::locate(50, 15);
-    if (puntajeJugador1 == puntajeJugador2) {
-        cout << "¡EMPATE! Ambos jugadores tienen los mismos puntos." << endl;
-    } else if (puntajeJugador1 > puntajeJugador2) {
-        rlutil::locate(45,17);
-        cout << "¡" << nombre1 << " GANO LA PARTIDA!" << endl;
-
-    } else if (puntajeJugador2 > puntajeJugador1) {
-        rlutil::locate(45,17);
-        cout << "¡" << nombre2 << " GANO LA PARTIDA!" << endl;
-    }
-
-    cout << "PUNTAJE FINAL: " << endl;
-    cout << nombre1 << ": " << puntajeJugador1 << " puntos" << endl;
-    cout << nombre2 << ": " << puntajeJugador2 << " puntos" << endl;
-
-    rlutil::locate(1, 40);
-    cout << "Presione una tecla para volver a menu principal...";
-    rlutil::anykey();
-    rlutil::cls();
-}
-*/
 
