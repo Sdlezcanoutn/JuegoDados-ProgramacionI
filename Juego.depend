@@ -37,7 +37,7 @@
 
 1719417053 c:\users\sol15\documents\cien o escalera\juegodados\juego\funciones.h
 
-1720133131 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\dados.cpp
+1720143058 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\dados.cpp
 	<iostream>
 	"rlutil.h"
 	"Dados.h"
@@ -68,7 +68,7 @@
 
 1720029648 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\funciones.h
 
-1720133561 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\funciones.cpp
+1720143937 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\funciones.cpp
 	<iostream>
 	"Funciones.h"
 	"Dados.h"
@@ -76,12 +76,11 @@
 	<cstdlib>
 	<ctime>
 
-1720133744 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\menu.cpp
+1720143670 source:c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\menu.cpp
 	<iostream>
 	"Menu.h"
 	"rlutil.h"
-	"Dados.h"
 	"Funciones.h"
 
-1719497839 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\menu.h
+1720138969 c:\users\sol15\documents\cien o escalera\juegodados trabajo\juego\menu.h
 

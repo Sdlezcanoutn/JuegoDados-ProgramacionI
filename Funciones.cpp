@@ -26,17 +26,20 @@ void juegoUnJugador() {
 }
     int puntajeTotal = 0; /// INICIO DE PUNTAJES
     int ronda = 0; ///INICIO DE RONDA
-    //PRUEBA
     int dados[TAM_CANTIDAD_DADO];
 
+    //prueba
+    bool rondaTerminada = false;
+    int TiradasJugador = 0;
 
-    ///PRUEBAAAAAAAAAAAA
+
     int puntuacionMaxima = 0;
     string nombreMaximaPuntuacion;
 
 
 /// SI SE LLEGA A 100 GANA (PRINCIPAL)
-while (puntajeTotal < 100) {
+//while (puntajeTotal < 100)
+    while (!rondaTerminada){
         int maxPuntajeRonda = 0; /// INICIA MAX PUNTAJE
         ronda++; /// SUMA LAS RONDAS
         rlutil::cls();
@@ -58,15 +61,17 @@ while (puntajeTotal < 100) {
             cout << "LANZAMIENTO NUMERO " << i << ": " << endl;
             int puntajeLanzamiento = calcularPuntaje(dados);
 
-            rlutil::locate(1, 17); ///POSICION PARA QUE SE VEA
+            rlutil::locate(1, 28); ///POSICION PARA QUE SE VEA
             cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
 
             /// ACA SE CONSULTAN LOS DADOS PARA DAR PUNTOS
             if (puntajeLanzamiento == 100) {
+                rlutil::locate(2,29);
                 cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
-                i = 4; ///SALIDA
+                //i = 4; ///SALIDA
             } else if (puntajeLanzamiento == 0) {
                 puntajeTotal = 0;
+                rlutil::locate(2,38);
                 cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
             }
             if (puntajeLanzamiento > maxPuntajeRonda) {
@@ -75,21 +80,23 @@ while (puntajeTotal < 100) {
 
             if (puntajeTotal + puntajeLanzamiento >= 100) {
                 puntajeTotal += puntajeLanzamiento;
-                i = 4; ///PARA SALIR PORQUE I TIENE QUE IR HASTA 3 POR SUS LANZAMIENTOS
+               // i = 4; ///PARA SALIR PORQUE I TIENE QUE IR HASTA 3 POR SUS LANZAMIENTOS
             }
 
             if (i == 3) {
                 puntajeTotal += maxPuntajeRonda;
-                cout << "MAXIMO PUNTAJE OBTENIDO DE LA RONDA: " << maxPuntajeRonda << endl;
-                cout << "PUNTAJE TOTAL DE PARTIDA: " << puntajeTotal << endl << endl;
+               // cout << "MAXIMO PUNTAJE OBTENIDO DE LA RONDA: " << maxPuntajeRonda << endl;
+                //cout << "PUNTAJE TOTAL DE PARTIDA: " << puntajeTotal << endl << endl;
                 rlutil::locate(60,25);
-                cout << "Presione una tecla para pasar a la ronda NUMERO " << ronda + 1;
+              //  cout << "Presione una tecla para pasar a la ronda NUMERO " << ronda + 1;
                 rlutil::anykey();
+            //    rlutil::cls();
             }
         }
 
         cout << "PUNTAJE TOTAL RONDA ACTUAL: " << maxPuntajeRonda << " | PUNTAJE TOTAL: " << puntajeTotal << endl << endl;
 if (puntajeTotal >= 100) { ///define ganador
+      rondaTerminada = true;
         PlaySound(TEXT("victoria.wav"), NULL, SND_FILENAME | SND_ASYNC);
             cout << nombre << " GANO LA PARTIDA CON " << puntajeTotal << " PUNTOS EN " << ronda << " RONDAS." << endl;
 
@@ -99,7 +106,7 @@ if (puntajeTotal >= 100) { ///define ganador
             {
                 puntuacionMaxima = puntajeTotal; // Si es mayor a la puntuacion maxima, lo actualizo con el nuevo puntaje final.
                 nombreMaximaPuntuacion = nombre; // Actualizo nombre.
-                rlutil::locate(46,26);
+                rlutil::locate(40,45);
                 cout << "PUNTUACION MAXIMA DEL JUEGO: " << " [ " << puntuacionMaxima << " ] " << " Y LO REALIZO: " << " [ " << nombreMaximaPuntuacion << " ] " << endl;
             }
         }
@@ -111,7 +118,7 @@ if (puntajeTotal >= 100) { ///define ganador
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////// JUEGO DOS JUGADORES /////////////////////////////////////////////////
+//////////////////////////////////////////////////////// JUEGO DOS JUGADORES /////////////////////////////////////////////////
 
 void juegoDosJugadores() {
     rlutil::hidecursor(); // OCULTA EL CURSOR
@@ -169,11 +176,13 @@ void juegoDosJugadores() {
             rlutil::locate(1, 17); // POSICION PARA QUE SE VEA
             cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
             if (puntajeLanzamiento == 100) { ///COMO EL CALCULO PUNTAJE YA HIZO SU FUNCION, ACA PREGUNTAMOS SI FUE IGUAL A 100 ASI YA SE DEFINE GANADOR
+                rlutil::locate(2,29);
                 cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
                 puntajeJugador1 += 100;
                 break;
             } else if (puntajeLanzamiento == 0) { ///SI ES 0 REPENTINAMENTE ES PORQUE SACO 6 DE 6
                 puntajeJugador1 = 0;
+                rlutil::locate(2,29);
                 cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
                 break;
             }///CONSULTA SI EL LANZAMIENTO ACTUAL ES MAYOR AL MAX
@@ -208,11 +217,13 @@ void juegoDosJugadores() {
             rlutil::locate(1, 17); // POSICION PARA QUE SE VEA
             cout << "PUNTAJE: " << puntajeLanzamiento << endl << endl;
             if (puntajeLanzamiento == 100) {
+                rlutil::locate(2,29);
                 cout << "SUMASTE 100 PUNTOS Y GANASTE LA PARTIDA POR HABER OBTENIDO UNA ESCALERA." << endl;
                 puntajeJugador2 += 100;
                 break;
             } else if (puntajeLanzamiento == 0) {
                 puntajeJugador2 = 0;
+                rlutil::locate(2,29);
                 cout << "SACASTE SEXTETO DE 6 Y POR ESO TU PUNTAJE VUELVE A 0." << endl;
                 break;
             }
@@ -304,7 +315,7 @@ int calcularPuntaje(int dados[]) {
 /// SEIS NUMEROS IGUALES, SE MULTIPLICA POR 10 EL NUMERO DEL DADO
     if (cont == 36 && dados[0] != 6) {
         puntos = dados[0] * 10;
-        rlutil::locate(1,16);
+        rlutil::locate(1,29);
         cout << "SEXTETO DE " << dados[0] << endl << endl;
     }
     /// SEIS 6, SE VUELVE A 0

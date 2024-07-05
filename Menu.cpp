@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Menu.h"
 #include "rlutil.h"
-#include "Dados.h"
 #include "Funciones.h"
 
 using namespace std;
@@ -19,7 +18,6 @@ void Menu(){ ///FUNCION MENU
         cout << "Ingrese una opcion: " << endl;
         cout << "1. MODO 1 JUGADOR" << endl;
         cout << "2. MODO 2 JUGADORES" << endl;
-        cout << "3. RANKING" << endl;
         cout << "4. SALIR" << endl << endl;
 
         cin >> opcion;
@@ -36,11 +34,8 @@ void Menu(){ ///FUNCION MENU
             break;
         case 3:
             rlutil::cls();
-
-            break;
-        case 4:
-            rlutil::cls();
             rlutil::locate(1,20);
+            PlaySound(TEXT("final.wav"), NULL, SND_FILENAME | SND_ASYNC);
             cout << "                                                                    ¡ADIOS! NOS VEMOS PRONTO                                                                              " << endl;
         rlutil::anykey();
         rlutil::cls(); //
@@ -53,7 +48,7 @@ void Menu(){ ///FUNCION MENU
             rlutil::anykey();
             rlutil::cls();
             }
-    } while (opcion != 4);
+    } while (opcion != 3);
 
 
 }

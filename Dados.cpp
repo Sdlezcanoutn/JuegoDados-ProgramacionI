@@ -126,7 +126,6 @@ void NumeroDado(int numero, int pos1, int pos2) {
 
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                         ///LANZAMIENTOS
 
@@ -155,18 +154,22 @@ void mostrarDados(int dados[]) {
         int y = rand() % 4 + 8; /// y aleatoria pero dentro de rango 4 a la derecha y 8 abajo asi se ve lo anterior
         int x = 15 + i * 10; /// x aleatoria pero centrandolo hacia  a la derecha y una division de 10 entre cada dado
         NumeroDado(dados[i], x, y); ///llamo funcion NumeroDado para mostrar la posicion x y definida en otra libreria
-        rlutil::msleep(40); //simula la accion de tirar dados retardando el tiempo
+        rlutil::msleep(40); ///simula la accion de tirar dados retardando el tiempo
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////TEST///////////////////////////////////////////////////
 
-/*tirarDados(int dados[]){
-for (int i=0; i < TAM_CANTIDAD_DADO; I++){
+/*
+void tirarDados(int dados[]){
+for (int i=0; i < TAM_CANTIDAD_DADO; i++){
     int numero;
     cout << "INGRESE EL VALOR DEL DADO: " << endl;
     cin >> numero;
 
     dados[i] = numero;
+}
 }
 
 */
